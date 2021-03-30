@@ -1,26 +1,22 @@
 package lotto.controller;
 
 import lotto.domain.Money;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
 
-    private Money money;
-
-    @BeforeAll
-    void setUp() {
-        money = new Money("14000");
-    }
-
     @DisplayName("금액에 맞는 로또 갯수를 반환한다.")
     @Test
     void getLottoCountTest() {
+        Money money = new Money("14000");
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.purchaseLotto(money);
-        assertThat(lottoMachine.getPurchaseLottoCount()).isEqualTo(14);
+        lottoMachine.purchaseLotto(money, new ArrayList<>());
+        assertThat(lottoMachine.getPurchaseLottoCount().getAutoCount()).isEqualTo(14);
     }
 }
+

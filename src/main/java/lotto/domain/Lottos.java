@@ -7,8 +7,9 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(List<Lotto> manualLottos, List<Lotto> lottos) {
+        this.lottos = manualLottos;
+        this.lottos.addAll(lottos);
     }
 
     public int lottoCount() {
@@ -27,5 +28,9 @@ public class Lottos {
             resultGroup.update(winingLotto.howMatch(lotto));
         }
         return resultGroup;
+    }
+
+    public void addLotto(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
     }
 }
