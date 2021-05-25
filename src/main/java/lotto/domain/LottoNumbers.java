@@ -1,17 +1,30 @@
 package lotto.domain;
 
+import lotto.domain.wrapper.LottoNumber;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
-    List<Integer> lottoNumbers;
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers() {
-        this(new ArrayList<>());
-    }
+    public LottoNumbers() { }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        for (Integer number : lottoNumbers) {
+            this.lottoNumbers.add(LottoNumber.of(number));
+        }
+    }
+
+    public LottoNumbers(String[] lottoNumbers) {
+        for (String number : lottoNumbers) {
+            this.lottoNumbers.add(LottoNumber.of(Integer.parseInt(number)));
+        }
+    }
+
+    private void sort() {
+        Collections.sort(this.lottoNumbers);
     }
 
     public boolean sizeIsNotSameWith(int lottoNumberCount) {
@@ -19,15 +32,13 @@ public class LottoNumbers {
     }
 
     public void add(Integer number) {
-        lottoNumbers.add(number);
-    }
-
-    public int get(int index) {
-        return lottoNumbers.get(index);
+        lottoNumbers.add(LottoNumber.of(number));
     }
 
     @Override
     public String toString() {
+        sort();
+
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < lottoNumbers.size(); ++i) {
             sb.append(lottoNumbers.get(i) + ", ");
@@ -37,11 +48,7 @@ public class LottoNumbers {
         return sb.toString();
     }
 
-    public String formattedString() {
-        return lottoNumbers.toString();
-    }
-  
-    public List<Integer> lottoNumbers() {
+    public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
 }

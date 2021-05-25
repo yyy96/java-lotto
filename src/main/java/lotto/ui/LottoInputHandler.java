@@ -1,28 +1,18 @@
 package lotto.ui;
 
-import lotto.domain.LottoPurchaseBudget;
+import java.io.IOException;
+import java.util.List;
 
-import java.util.Scanner;
+public interface LottoInputHandler {
 
-public class LottoInputHandler {
-    public LottoPurchaseBudget scanLottoPurchaseBudget() {
-        System.out.println("구입금액을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
+    int scanLottoPurchaseBudget();
 
-        return new LottoPurchaseBudget(scanner.nextInt());
-    }
+    int scanCountOfManualLotto();
 
-    public String scanLottoWinNumbersString() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
+    List<String> scanManualLottos(int manualCount) throws IOException;
 
-        return scanner.nextLine();
-    }
+    String scanLottoWinNumbersString();
 
-    public int scanLottoBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
+    int scanLottoBonusNumber();
 
-        return scanner.nextInt();
-    }
 }

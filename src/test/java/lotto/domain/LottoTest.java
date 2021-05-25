@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.DisplayName;
+import lotto.domain.wrapper.LottoPurchase;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -54,7 +54,7 @@ public class LottoTest {
 
         LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
 
-        assertThat(resultPack.calculateProfitRatio(new LottoPurchaseBudget(3000)))
+        assertThat(resultPack.calculateProfitRatio(new LottoPurchase(3000)))
                                             .isEqualTo(666683.3333, within(0.1));
     }
 
@@ -87,17 +87,6 @@ public class LottoTest {
         assertThat(winNumbers.matchResultOf(lotto).matchCount()).isEqualTo(4);
     }
 
-    @DisplayName("랜덤으로 1~ 45 사이의 중복없는 번호들 생성")
-    @Test
-    void 구매_로또_번호생성_Test() {
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        String[] nums = lotto.lottoNumberString().substring(1, lotto.toString().length()-2).split(", |,");
-        for (int i = 0; i < nums.length; ++i) {
-            assertThat(Integer.parseInt(nums[i])).isGreaterThanOrEqualTo(1);
-            assertThat(Integer.parseInt(nums[i])).isLessThanOrEqualTo(45);
-        }
-    }
-
     @Test
     void 입력된_유효하지않은_당첨번호_Test() {
         assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 3, 4, 5, b", 7))
@@ -114,24 +103,24 @@ public class LottoTest {
 
     @Test
     void 구매개수만큼_로또_생성_Test() {
-        LottoPurchaseBudget budget = new  LottoPurchaseBudget(5000);
-        LottoGame game = new LottoGame();
-        Lottos lottos = game.buyLottos(budget.countOfAvailableLotto());
+        LottoPurchase budget = new LottoPurchase(5000);
+        Lottos lottos = new Lottos();
+        lottos.buyAuto(budget.countOfAvailableAutoLotto());
 
         assertThat(lottos.count()).isEqualTo(5);
     }
 
     @Test
     void 유효한_로또구매금액_Test() {
-        LottoPurchaseBudget budget = new  LottoPurchaseBudget(1000);
-        assertThat(budget.equals(new LottoPurchaseBudget(1000)));
+        LottoPurchase budget = new  LottoPurchase(1000);
+        assertThat(budget.equals(new LottoPurchase(1000)));
     }
 
     @Test
     void 유효하지않은_로또구매금액_Test() {
-        assertThatThrownBy(() -> new LottoPurchaseBudget(999))
+        assertThatThrownBy(() -> new LottoPurchase(999))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new LottoPurchaseBudget(900))
+        assertThatThrownBy(() -> new LottoPurchase(900))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

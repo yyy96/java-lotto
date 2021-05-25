@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.wrapper;
 
 import static lotto.domain.LottoGameOptions.LOTTO_PRICE;
 
@@ -7,7 +7,7 @@ public class LottoPurchaseBudget {
 
     public LottoPurchaseBudget(int money) {
         if (money < LOTTO_PRICE || money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 구매금액 입력은 1000원 이상의 1000단위 금액만 가능합니다.");
         }
         purchaseBudget = money;
     }
@@ -25,7 +25,7 @@ public class LottoPurchaseBudget {
         if (src == null || src.getClass() != this.getClass()) {
             return false;
         }
-        
+
         return super.equals(src) && ((LottoPurchaseBudget)src).purchaseBudget == purchaseBudget;
     }
 
@@ -35,5 +35,9 @@ public class LottoPurchaseBudget {
         int prime = 17;
 
         return result * prime + purchaseBudget;
+    }
+
+    public boolean isUnderManualBudgetOf(int manualCount) {
+        return purchaseBudget - (manualCount * LOTTO_PRICE) < 0;
     }
 }

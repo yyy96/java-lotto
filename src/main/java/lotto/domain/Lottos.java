@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import lotto.domain.generator.LottoGenerator;
+
 import java.util.*;
 
 import static lotto.domain.LottoGameOptions.*;
 
-public class Lottos implements Iterable<Lotto> {
+public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos() {
@@ -13,7 +15,7 @@ public class Lottos implements Iterable<Lotto> {
 
     public Lottos(int count) {
         while (count-- > 0) {
-            buy();
+            buyAuto();
         }
     }
 
@@ -21,15 +23,36 @@ public class Lottos implements Iterable<Lotto> {
         this.lottos = lottos;
     }
 
+    public Lottos(Lottos manualLottos, Lottos autoLottos) {
+        for (Lotto manualLotto : manualLottos.values()) {
+            this.lottos.add(manualLotto);
+        }
+        for (Lotto autoLotto : autoLottos.values()) {
+            this.lottos.add(autoLotto);
+        }
+    }
+
     public int count() {
         return lottos.size();
     }
 
-    public void buy() {
-        lottos.add(new Lotto(generateRandomLottoNumbers()));
+    public void buyManual(List<String> manualLottoStringList) {
+        for (String manualLottoString : manualLottoStringList) {
+            lottos.add(new Lotto(manualLottoString));
+        }
     }
 
-    private LottoNumbers generateRandomLottoNumbers() {
+    public void buyAuto(int countOfAvailableAutoLotto) {
+        while (countOfAvailableAutoLotto-- > 0) {
+            buyAuto();
+        }
+    }
+
+    private void buyAuto() {
+        lottos.add(new Lotto(generate()));
+    }
+
+    private LottoNumbers generate() {
         Stack<Integer> wholeLottoNumbers = makeWholeLottoNumbers(LOTTO_NUMBERS_FROM, LOTTO_NUMBERS_TO);
         Collections.shuffle(wholeLottoNumbers);
 
@@ -50,28 +73,25 @@ public class Lottos implements Iterable<Lotto> {
     }
 
     @Override
-    public String toString() {
-        return lottos.toString();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
     }
 
     @Override
-    public Iterator<Lotto> iterator() {
-        return new Iterator<Lotto>() {
-            int index = 0;
+    public int hashCode() {
+        return Objects.hash(lottos);
+    }
 
-            @Override
-            public boolean hasNext() {
-                return index < lottos.size();
-            }
-
-            @Override
-            public Lotto next() {
-                return lottos.get(index++);
-            }
-        };
+    @Override
+    public String toString() {
+        return lottos.toString();
     }
 
     public List<Lotto> values() {
         return this.lottos;
     }
+
 }

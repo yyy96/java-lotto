@@ -2,18 +2,15 @@ package lotto.ui;
 
 import lotto.domain.*;
 
-import java.util.Iterator;
-
 public class LottoOutputHandler {
 
-    public void printCount(int count) {
-        System.out.println(count+"개를 구매했습니다.");
+    public void printCount(int manualCount, int autoCount) {
+        System.out.println("\n수동으로 "+manualCount+"장, 자동으로 "+autoCount +"개를 구매했습니다.");
     }
 
     public void printBought(Lottos lottos) {
-        Iterator<Lotto> it = lottos.iterator();
-        while(it.hasNext()) {
-            System.out.println(it.next().toString());
+        for (Lotto lotto : lottos.values()) {
+            System.out.println(lotto.toString());
         }
         System.out.println();
     }
