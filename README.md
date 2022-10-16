@@ -1,16 +1,46 @@
-# 로또
-## 진행 방법
-* 로또 요구사항을 파악한다.
-* 요구사항에 대한 구현을 완료한 후 자신의 github 아이디에 해당하는 브랜치에 Pull Request(이하 PR)를 통해 코드 리뷰 요청을 한다.
-* 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH한다.
-* 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
+<br>
 
-## 온라인 코드 리뷰 과정
-* [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+## 🎡 로또 서비스
+<br>
+
+### 💻 프로젝트의 목표와 성과
+#### 목표
+- 모든 기능을 단위 테스트를 작성하여 TDD로 구현한다.
+- 객체지향적 설계를 지키기 위하여 일급 콜렉션으로 설계한다.
+- java enum을 적용해 프로그래밍을 구현한다.
+- 자바 코드 컨벤션을 지키면서 프로그래밍한다.
+
+#### 성과
+- Lotto의 필요한 로직들을 일급 컬렉션으로 만들어 관리하므로써 객체지향적 설계 역량을 향상시킬 수 있었다. <br>
+  [↳ 일급 컬렉션에 관한 블로그 포스팅](https://velog.io/@yyy96/FirstClassCollection)
+  
+- 전략 패턴을 사용하여 테스트 코드를 유연하게 만들며 디자인 패턴에 대한 중요성을 깨달았다. <br>
+  [↳ 전략 패턴에 관한 블로그 포스팅](https://velog.io/@yyy96/FirstClassCollection)
+<br>
+<br>
+
+### [💵 자동화 version 로또 서비스](https://github.com/yyy96/oop-lotto-service/tree/yeon)
+- 로또 구입 금액을 입력하면 로또를 자동으로 랜덤 발급해준다.
+- 지난 주 당첨 번호를 입력하면 현재 몇 개의 로또가 당첨되었는지 알려준다.
+<br>
+
+### [💵 수동화 version 로또 서비스](https://github.com/yyy96/oop-lotto-service/tree/lotto3)
+- 로또 구입 금액을 입력하면 로또를 자동으로 랜덤 발급해준다.
+- 지난 주 당첨 번호를 입력하면 현재 몇 개의 로또가 당첨되었는지 알려준다.
+<br>
+<br>
+
+### [📝 코드 리뷰 및 리팩터링 과정](https://github.com/next-step/java-lotto/pulls?q=is%3Apr+is%3Aclosed+author%3Ayyy96)
+![image](https://user-images.githubusercontent.com/65826145/196030991-45ef6f92-786a-44bb-9994-76d8c0e164df.png)
 
 
---------------------------------
-### 🔹 로또(수동) 기능 요구사항
+#### 📖 로또 기능 요구사항
+
+<details>
+<summary>자세한 로또 기능 요구사항 정리</summary>
+<div markdown="1">       
+
+<br>
 
 1. 구입 금액을 입력받는다 `(input_view)`
 2. **(추가기능)** 수동으로 구입할 로또 수를 입력받는다 `(input_view)`
@@ -36,3 +66,8 @@
 22. 3~6개(+보너스 추가 일치) 일치한 로또들의 당첨 금액을 계산한다. `(lottoTickets)`
 23. 당첨 금액 / 구입 금액 으로 총 수익률을 계산한다. `(lottoTickets)`
 24. 총 수익률을 출력한다. `(print_view)`
+
+<br>
+
+</div>
+</details>
