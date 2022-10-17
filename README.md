@@ -12,10 +12,10 @@
 
 #### 성과
 - Lotto의 필요한 로직들을 일급 컬렉션으로 만들어 관리하므로써 객체지향적 설계 역량을 향상시킬 수 있었다. <br>
-  [↳ 일급 컬렉션에 관한 블로그 포스팅](https://velog.io/@yyy96/FirstClassCollection)
+  [↳ 일급 컬렉션에 관한 블로그 포스팅 (@yyy96)](https://velog.io/@yyy96/FirstClassCollection)
   
 - 전략 패턴을 사용하여 테스트 코드를 유연하게 만들며 디자인 패턴에 대한 중요성을 깨달았다. <br>
-  [↳ 전략 패턴에 관한 블로그 포스팅](https://velog.io/@yyy96/FirstClassCollection)
+  [↳ 전략 패턴에 관한 블로그 포스팅 (@yyy96)](https://velog.io/@yyy96/FirstClassCollection)
 <br>
 <br>
 
